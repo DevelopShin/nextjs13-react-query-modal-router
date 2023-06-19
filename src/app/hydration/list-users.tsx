@@ -1,9 +1,16 @@
 'use client';
 
 import { useQuery } from '@tanstack/react-query';
+import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react';
-import { getUsers } from './page';
+import { User } from '../types';
+
+async function getUsers() {
+  const res = await fetch('https://jsonplaceholder.typicode.com/users');
+  const users = (await res.json()) as User[];
+  return users;
+}
 
 export default function ListUsers() {
   const [count, setCount] = React.useState(0);
@@ -45,12 +52,15 @@ export default function ListUsers() {
               style={{ border: '1px solid #ccc', textAlign: 'center' }}
             >
               <Link href={`/photos/${user.id}`}>
-                <img
+                <Image
                   src={`https://robohash.org/${user.id}?set=set2&size=180x180`}
                   alt={user.name}
-                  style={{ height: 180, width: 180 }}
+                  // style={{ height: 180, width: 180 }}
+                  // style={{ height: 180, width: 180 }}
                   width={180}
                   height={180}
+                  placeholder='blur' // 추가
+                  blurDataURL='data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAHCAYAAADAp4fuAAAAE0lEQVR42mN0XfehngENMA6oIABPRxC2b0sFwAAAAABJRU5ErkJggg=='
                 />
 
                 <h3>{user.name}</h3>

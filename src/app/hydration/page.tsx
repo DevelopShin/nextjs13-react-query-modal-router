@@ -4,15 +4,16 @@ import { dehydrate } from '@tanstack/query-core';
 import { User } from '../types';
 import ListUsers from './list-users';
 
-export async function getUsers() {
-  const res = await fetch('https://jsonplaceholder.typicode.com/users');
+async function getUsers() {
+  const res = await fetch('https://jsonplaceholder.typicode.com/users', {
+    // cache: 'force-cache', //SSG => getStaticSideProps
+    cache: 'no-store', //SSR => getServerSideProps
+    // next: {
+    // 	revalidate: 20, // ISR
+    // }
+  });
   const users = (await res.json()) as User[];
   return users;
-}
-export async function getUser(id: string) {
-  const res = await fetch(`https://jsonplaceholder.typicode.com/users/${id}`);
-  const user = (await res.json()) as User;
-  return user;
 }
 
 export default async function Hydation() {
