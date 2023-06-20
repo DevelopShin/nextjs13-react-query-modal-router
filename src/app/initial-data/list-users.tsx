@@ -4,12 +4,7 @@ import { useQuery } from '@tanstack/react-query';
 import Image from 'next/image';
 import React from 'react';
 import { User } from '../types';
-
-async function getUsers() {
-  const res = await fetch('https://jsonplaceholder.typicode.com/users');
-  const users = (await res.json()) as User[];
-  return users;
-}
+import { getUsers } from '@/fetch-api';
 
 export default function ListUsers({ users }: { users: User[] }) {
   const [count, setCount] = React.useState(0);

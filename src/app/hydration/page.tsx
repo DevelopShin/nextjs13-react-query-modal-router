@@ -3,18 +3,7 @@ import Hydrate from '@/utils/hydrate.client';
 import { dehydrate } from '@tanstack/query-core';
 import { User } from '../types';
 import ListUsers from './list-users';
-
-async function getUsers() {
-  const res = await fetch('https://jsonplaceholder.typicode.com/users', {
-    // cache: 'force-cache', //SSG => getStaticSideProps
-    cache: 'no-store', //SSR => getServerSideProps
-    // next: {
-    // 	revalidate: 20, // ISR
-    // }
-  });
-  const users = (await res.json()) as User[];
-  return users;
-}
+import { getUsers } from '@/fetch-api';
 
 export default async function Hydation() {
   const queryClient = getQueryClient();

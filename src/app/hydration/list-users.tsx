@@ -5,12 +5,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react';
 import { User } from '../types';
-
-async function getUsers() {
-  const res = await fetch('https://jsonplaceholder.typicode.com/users');
-  const users = (await res.json()) as User[];
-  return users;
-}
+import { getUsers } from '@/fetch-api';
 
 export default function ListUsers() {
   const [count, setCount] = React.useState(0);

@@ -1,17 +1,13 @@
 'use client';
 
 import { User } from '@/app/types';
+import { getUser } from '@/fetch-api';
 import { useQuery } from '@tanstack/react-query';
 import Image from 'next/image';
 
 type Props = {
   id: string;
 };
-async function getUser(id: string) {
-  const res = await fetch(`https://jsonplaceholder.typicode.com/users/${id}`);
-  const user = (await res.json()) as User;
-  return user;
-}
 
 export const Photo = ({ id }: Props) => {
   const {
